@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 
@@ -15,10 +17,9 @@ int main()
     std::cout << "--------------------------------" << std::endl;
     std::vector<std::string> splitVec;
     boost::algorithm::split(splitVec, str, boost::algorithm::is_any_of(","));
-    for (auto iter = splitVec.begin(); iter != splitVec.end(); iter++) {
-        boost::algorithm::trim(*iter);
-        std::cout << *iter << "/" << std::endl;
-    }
+
+    auto func = [](std::string& str) {boost::algorithm::trim(str); std::cout << str << "/" << std::endl; };
+    std::for_each(splitVec.begin(), splitVec.end(), func);
     std::cout << "--------------------------------" << std::endl;
 
     boost::format fmter("writing %1%, x = %2% : %3%-th try %1%");
