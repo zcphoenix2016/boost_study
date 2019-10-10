@@ -7,19 +7,26 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 
-using namespace std;
-
 int main()
 {
-    string str = " zcp, , phoenix,  1234 ";
-    cout << str << endl;
+    std::string str = " zcp, , phoenix,  1234 ";
+    std::cout << str << std::endl;
 
-    vector<string> splitVec;
+    std::cout << "--------------------------------" << std::endl;
+    std::vector<std::string> splitVec;
     boost::algorithm::split(splitVec, str, boost::algorithm::is_any_of(","));
     for (auto iter = splitVec.begin(); iter != splitVec.end(); iter++) {
         boost::algorithm::trim(*iter);
-        cout << *iter << "/" << endl;
+        std::cout << *iter << "/" << std::endl;
     }
+    std::cout << "--------------------------------" << std::endl;
 
-    cout << endl << boost::format("writing %1%, x = %2% : %3%-th try %1%") % "toto" % 40.23 % 50 << endl;
+    boost::format fmter("writing %1%, x = %2% : %3%-th try %1%");
+    fmter % "toto";
+    fmter % 40.23;
+    fmter % 50;
+    std::cout << fmter << std::endl;
+
+    str = fmter.str();
+    std::cout << str << std::endl;
 }
